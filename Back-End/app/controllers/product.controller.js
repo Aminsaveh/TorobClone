@@ -1,6 +1,7 @@
 const Product = require("../models/product.model");
 const { StoreOwner } = require("../models/storeowner.model");
 const { Store } = require("../models/store.model");
+const { ProductStore } = require("../models/productstore.model");
 const db = require("../models");
 const Counters = db.counters;
 function getNextSequence(name, callback) {
@@ -105,7 +106,17 @@ exports.addStore = (req, res) => {
                         }});
                         return;
                 }
-                Store
+            var shop = user.stores.find(s=>s.id === req.body.storeId);
+            if(!shop){
+                res.status(200).send({
+                    error: {
+                        message : "No Shop Found!"
+                    }});
+                    return;
+            }
+            var productStore = new ProductStore({
+
+            })
         });
     });
 }

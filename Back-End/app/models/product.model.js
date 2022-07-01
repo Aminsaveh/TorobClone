@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ProductStore } = require("./productstore.model");
+const { ProductStoreSchema } = require("./productstore.model");
 const ProductSchema =  new mongoose.Schema({
   id           : {type : Number},
   price        : {type : Number},
@@ -8,13 +8,13 @@ const ProductSchema =  new mongoose.Schema({
   brand        : {type : String},
   imageUrl     : {type : String},
   details      : {type : Map, of: String},
-  stores       : {type : [ProductStore]}
+  stores       : {type : [ProductStoreSchema]}
 });
 const Product = mongoose.model(
   "Product",
   ProductSchema
 );
 module.exports = {
-Product : Product,
+    Product : Product,
   ProductSchema : ProductSchema
 };
