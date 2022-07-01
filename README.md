@@ -5,22 +5,22 @@ Implementing TorobClone As Final Project Of Internet Engineering Course @ SBU
 
 # SignUp & Login
 
-![SignUpLogin](SignUpLogin.jpeg)
+![SignUpLogin](Images/SignUpLogin.jpeg)
 
 
 
 # HomePage
 
-![HomePage](HomePage.jpeg)
+![HomePage](Images/HomePage.jpeg)
 
 
 # SearchPage
 
-![SearchPage](SearchPage.jpeg)
+![SearchPage](Images/SearchPage.jpeg)
 
 # ProductPage
-![ProductPage](ProductPage.jpeg)
+![ProductPage](Images/ProductPage.jpeg)
 
 # ProfilePage
 
-![ProfilePage](ProfilePage.jpeg)
+![ProfilePage](Images/ProfilePage.jpeg)
