@@ -26,7 +26,6 @@ function getNextSequence(name, callback) {
 
 exports.addStore = (req,res)=>{
     StoreOwner.findOne({id:req.userId}).exec(function (err, user) {
-                console.log("here")
                 if(err){
                     res.status(200).send({
                         error: {
@@ -41,7 +40,6 @@ exports.addStore = (req,res)=>{
                         }});
                         return;
                 }
-                console.log("here1")
                 getNextSequence("storeId", function(err, result){
                         if(err){
                             res.status(200).send({
@@ -55,8 +53,9 @@ exports.addStore = (req,res)=>{
                             name    : req.body.name,
                             city    : req.body.city,
                             ownerId : req.userId,
+                            reports : [],
+                            products: []
                         });
-                    console.log("here2")
                     user.stores.push(store);
                     store.save((err, resu) => {
                             if(err){
@@ -84,3 +83,20 @@ exports.addStore = (req,res)=>{
     });
 
 };
+
+
+exports.getStores = (req,res)=>{
+    Store.find({ownerId : req.userId}).exec(function (err, stores) {
+            if(err){
+                res.status(200).send({
+                    error: {
+                        message : "Bad request!"
+                    }});
+                    return;
+            }
+            res.status(200).send({
+                stores  : stores,
+                message : "successful"
+              });
+    });
+}

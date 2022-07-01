@@ -7,7 +7,7 @@ const StoreSchema =  new mongoose.Schema({
   name           : {type : String},
   city           : {type : String},
   reports        : {type : [ReportSchema]},
-  products       : {type : [ProductSchema]},
+  products       : {type : [String]},
 });
 const Store = mongoose.model(
   "Store",

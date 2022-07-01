@@ -9,7 +9,8 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/api/v1/user"              ,controller.getAllUsers);
+  app.get("/api/v1/user/all"                               ,controller.getAllUsers);
+  app.get("/api/v1/user"             ,[authJwt.verifyToken],controller.getUser);
   app.post("/api/v1/user/favorite"   ,[authJwt.verifyToken],controller.addFavorite);
   app.get("/api/v1/user/favorites"   ,[authJwt.verifyToken],controller.getFavorites);
   app.post("/api/v1/user/delfavorite",[authJwt.verifyToken],controller.deleteFavorite);

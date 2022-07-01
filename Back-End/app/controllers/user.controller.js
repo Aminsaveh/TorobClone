@@ -3,9 +3,6 @@ const { NormalUser } = require("../models/normaluser.model");
 const Product = require("../models/product.model");
 const { User } = require("../models/user.model");
 
-
-
-
 exports.getAllUsers = (req,res)=>{
     User.find({}).exec(function (err, allUsers) {
         if(err){
@@ -15,24 +12,31 @@ exports.getAllUsers = (req,res)=>{
                 }});
                 return;
         }
-
         res.status(200).send({
             users   : allUsers,
             message : "successful"
           });
 
-
     });
-
-
-
 }
 
 
+exports.getUser = (req,res)=>{
+    User.find({id:req.userId}).exec(function (err, user) {
+        if(err){
+            res.status(200).send({
+                error: {
+                    message : "Bad request!"
+                }});
+                return;
+        }
+        res.status(200).send({
+            user   : user,
+            message : "successful"
+          });
 
-
-
-
+    });
+}
 
 
 

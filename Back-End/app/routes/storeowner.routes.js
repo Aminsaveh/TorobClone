@@ -11,6 +11,6 @@ module.exports = function(app) {
 
 
   app.post("/api/v1/storeowner/addstore"   ,[authJwt.verifyToken] , controller.addStore);
-
+  app.get("/api/v1/storeowner/stores"   ,[authJwt.verifyToken] , controller.getStores);
 
 }
