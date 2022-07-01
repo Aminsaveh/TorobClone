@@ -51,6 +51,7 @@ exports.createProduct = (req, res) => {
                     var product = new Product.Product({
                         id       : result,
                         name     : req.body.name,
+                        price    : 0,
                         category : req.body.category,
                         brand    : req.body.brand,
                         imageUrl : req.body.imageUrl,
@@ -115,8 +116,11 @@ exports.addStore = (req, res) => {
                     return;
             }
             var productStore = new ProductStore({
-
+                    price   : req.body.price,
+                    storeId : req.body.storeId
             })
+            product.price = req.body.price;
+            product.stores.push(productStore);
         });
     });
 }
@@ -161,8 +165,6 @@ exports.getProductsByName = (req,res)=>{
                     }
                 });
             });
-            if(chosenProducts.length === 0)
-                chosenProducts = allProducts;
         res.status(200).send({
             products: chosenProducts,
             message : "successful"
