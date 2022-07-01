@@ -1,5 +1,6 @@
 const Product = require("../models/product.model");
 const { StoreOwner } = require("../models/storeowner.model");
+const { Store } = require("../models/store.model");
 const db = require("../models");
 const Counters = db.counters;
 function getNextSequence(name, callback) {
@@ -49,7 +50,6 @@ exports.createProduct = (req, res) => {
                     var product = new Product.Product({
                         id       : result,
                         name     : req.body.name,
-                        price    : req.body.price,
                         category : req.body.category,
                         brand    : req.body.brand,
                         imageUrl : req.body.imageUrl,
@@ -69,11 +69,48 @@ exports.createProduct = (req, res) => {
                                 product: product,
                                 message : "successful"
                               });
-
                     });
             });
     });
 }
+
+exports.addStore = (req, res) => {
+    StoreOwner.findOne({id:req.userId}).exec(function (err, user) {
+        if(err){
+            res.status(200).send({
+                error: {
+                    message : "Bad request!"
+                }});
+                return;
+        }
+        if(!user){
+            res.status(200).send({
+                error: {
+                    message : "Permission Denied!"
+                }});
+                return;
+        }
+        Product.Product.find({id : req.body.productId},function(err,product){
+                if(err){
+                    res.status(200).send({
+                        error: {
+                            message : "Bad request!"
+                        }});
+                        return;
+                }
+                if(!product){
+                    res.status(200).send({
+                        error: {
+                            message : "No Product Found!"
+                        }});
+                        return;
+                }
+                Store
+        });
+    });
+}
+
+
 
 
 exports.getAllProducts = (req, res) => {
