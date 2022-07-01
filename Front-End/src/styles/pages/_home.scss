@@ -1,0 +1,6 @@
+.search-input {
+    top: 25%;
+    @include mediaQuery(sm) {
+        top: 50%;
+    }
+}

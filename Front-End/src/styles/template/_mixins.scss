@@ -1,0 +1,9 @@
+@mixin mediaQuery($breakpoint) {
+    @each $breakpoints, $size in $mediaQueryBreakPoints {
+        @if $breakpoint==$breakpoints {
+            @media screen and (min-width: $size) {
+                @content;
+            }
+        }
+    }
+}

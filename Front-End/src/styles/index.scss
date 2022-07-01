@@ -1,0 +1,17 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+// Template
+@import "./template/mixins";
+@import "./template/variables";
+@import "./template/reset";
+@import "./template/template";
+
+// Pages
+@import "./pages/home";
+@import "./pages/profile";
+
+// Components
+@import "./components/header";
+@import "./components/footer";
+@import "./components//side-menu.scss";

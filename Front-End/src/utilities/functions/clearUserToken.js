@@ -1,0 +1,1 @@
+export const clearUserToken = () => localStorage.clear()

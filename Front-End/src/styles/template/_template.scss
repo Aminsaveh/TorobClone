@@ -1,0 +1,122 @@
+.btn-white {
+    background-color: white !important;
+}
+
+.bg-gray-200 {
+    background-color: var(--bs-gray-200) !important;
+}
+
+.rounded-1 {
+    border-radius: 0.5rem !important;
+}
+
+.y-flip {
+    transform: rotate(180deg) !important;
+}
+
+.transition-transform-200 {
+    transition: transform 0.2s ease-in-out;
+}
+
+@for $value from 1 to 96 {
+    .fs-#{$value}px {
+        font-size: #{$value}px !important;
+    }
+}
+
+@for $value from 1 to 96 {
+    .w-#{$value}px {
+        width: #{$value}px !important;
+    }
+}
+
+div.hover-dark:hover,
+button.hover-dark:hover {
+    color: black !important;
+}
+
+div.hover-white:hover,
+button.hover-white:hover {
+    color: white !important;
+}
+
+div.hover-success:hover,
+button.hover-success:hover {
+    color: var(--bs-success) !important;
+}
+
+div.hover-danger:hover,
+button.hover-danger:hover {
+    color: var(--bs-danger) !important;
+}
+
+div.hover-bg-success:hover,
+button.hover-bg-success:hover {
+    background-color: #198754 !important;
+}
+
+div.hover-bg-gray:hover,
+button.hover-bg-gray:hover {
+    background-color: var(--bs-gray-200) !important;
+}
+
+.product-title {
+    font-size: 20px;
+    @include mediaQuery(sm) {
+        font-size: 18px;
+    }
+    @include mediaQuery(md) {
+        font-size: 16px;
+    }
+    @include mediaQuery(lg) {
+        font-size: 14px;
+    }
+}
+
+.product-price {
+    font-size: 18px;
+    @include mediaQuery(sm) {
+        font-size: 16px;
+    }
+    @include mediaQuery(md) {
+        font-size: 14px;
+    }
+    @include mediaQuery(lg) {
+        font-size: 12px;
+    }
+}
+
+.product-store {
+    font-size: 20px;
+    @include mediaQuery(sm) {
+        font-size: 18px;
+    }
+    @include mediaQuery(md) {
+        font-size: 16px;
+    }
+    @include mediaQuery(lg) {
+        font-size: 14px;
+    }
+}
+
+.product-button {
+    font-size: 36px;
+    @include mediaQuery(sm) {
+        font-size: 32px;
+    }
+    @include mediaQuery(md) {
+        font-size: 28px;
+    }
+    @include mediaQuery(lg) {
+        font-size: 24px;
+    }
+}
+
+.heart-icon {
+    width: 25px;
+    height: auto;
+}
+
+.overflow-auto {
+    overflow: auto !important;
+}

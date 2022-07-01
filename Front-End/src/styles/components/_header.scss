@@ -1,0 +1,24 @@
+.header-menu {
+    right: 2vw;
+    width: calc(100% - 4vw);
+    z-index: 10 !important;
+    // @include mediaQuery(lg) {
+    //     max-width: 935px !important;
+    // }
+    // @include mediaQuery(xl) {
+    //     max-width: 1115px !important;
+    // }
+    // @include mediaQuery(xxl) {
+    //     max-width: 1295px !important;
+    // }
+}
+
+.header-search {
+    width: 75% !important;
+    @include mediaQuery(sm) {
+        width: 50% !important;
+    }
+    @include mediaQuery(lg) {
+        width: 50% !important;
+    }
+}
