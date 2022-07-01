@@ -4,14 +4,14 @@ const Product = require("../models/product.model");
 exports.addFavorite = (req, res) => {
      NormalUser.findOne({id:req.userId}).exec(function (err, user) {
             if(err){
-                res.status(400).send({
+                res.status(200).send({
                     error: {
                         message : "Bad request!"
                     }});
                     return;
             }
             if(!user){
-                res.status(400).send({
+                res.status(200).send({
                     error: {
                         message : "User Not Found!"
                     }});
@@ -19,14 +19,14 @@ exports.addFavorite = (req, res) => {
             }
             Product.Product.findOne({id:req.body.id},function(err,product){
                     if(err){
-                        res.status(400).send({
+                        res.status(200).send({
                             error: {
                                 message : "Bad request!"
                             }});
                             return;
                     }
                     if(!product){
-                        res.status(400).send({
+                        res.status(200).send({
                             error: {
                                 message : "Product Not Found!"
                             }});
@@ -38,7 +38,7 @@ exports.addFavorite = (req, res) => {
                     }
                     user.updateOne({favorites :user.favorites}, (err, result) => {
                             if(err){
-                                res.status(400).send({
+                                res.status(200).send({
                                     error: {
                                         message : "Bad request!"
                                     }});
@@ -57,14 +57,14 @@ exports.addFavorite = (req, res) => {
 exports.getFavorites = (req, res) => {
     NormalUser.findOne({id:req.userId}).exec(function (err, user) {
         if(err){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "Bad request!"
                 }});
                 return;
         }
         if(!user){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "User Not Found!"
                 }});
@@ -84,14 +84,14 @@ exports.getFavorites = (req, res) => {
 exports.deleteFavorite = (req, res) => {
     NormalUser.findOne({id:req.userId}).exec(function (err, user) {
         if(err){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "Bad request!"
                 }});
                 return;
         }
         if(!user){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "User Not Found!"
                 }});
@@ -100,7 +100,7 @@ exports.deleteFavorite = (req, res) => {
         user.favorites = user.favorites.filter(item => item.id!==req.body.id);
         user.updateOne({favorites :user.favorites}, (err, result) => {
                 if(err){
-                    res.status(400).send({
+                    res.status(200).send({
                         error: {
                             message : "Bad request!"
                         }});
@@ -118,14 +118,14 @@ exports.deleteFavorite = (req, res) => {
 exports.addLatest = (req, res) => {
     NormalUser.findOne({id:req.userId}).exec(function (err, user) {
         if(err){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "Bad request!"
                 }});
                 return;
         }
         if(!user){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "User Not Found!"
                 }});
@@ -133,14 +133,14 @@ exports.addLatest = (req, res) => {
         }
         Product.Product.findOne({id:req.body.id},function(err,product){
                 if(err){
-                    res.status(400).send({
+                    res.status(200).send({
                         error: {
                             message : "Bad request!"
                         }});
                         return;
                 }
                 if(!product){
-                    res.status(400).send({
+                    res.status(200).send({
                         error: {
                             message : "Product Not Found!"
                         }});
@@ -150,7 +150,7 @@ exports.addLatest = (req, res) => {
                  user.latest.push(product);
                 user.updateOne({latest :user.latest}, (err, result) => {
                         if(err){
-                            res.status(400).send({
+                            res.status(200).send({
                                 error: {
                                     message : "Bad request!"
                                 }});
@@ -170,14 +170,14 @@ exports.addLatest = (req, res) => {
 exports.getLatest = (req, res) => {
     NormalUser.findOne({id:req.userId}).exec(function (err, user) {
         if(err){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "Bad request!"
                 }});
                 return;
         }
         if(!user){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "User Not Found!"
                 }});

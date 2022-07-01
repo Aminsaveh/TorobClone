@@ -25,14 +25,14 @@ function getNextSequence(name, callback) {
 exports.createProduct = (req, res) => {
     StoreOwner.findOne({id:req.userId}).exec(function (err, user) {
             if(err){
-                res.status(400).send({
+                res.status(200).send({
                     error: {
                         message : "Bad request!"
                     }});
                     return;
             }
             if(!user){
-                res.status(400).send({
+                res.status(200).send({
                     error: {
                         message : "Permission Denied!"
                     }});
@@ -40,7 +40,7 @@ exports.createProduct = (req, res) => {
             }
             getNextSequence("productId", function(err, result){
                     if(err){
-                        res.status(400).send({
+                        res.status(200).send({
                             error: {
                                 message : "Bad request!"
                             }});
@@ -59,7 +59,7 @@ exports.createProduct = (req, res) => {
 
                     product.save((err, resu) => {
                             if(err){
-                                res.status(400).send({
+                                res.status(200).send({
                                     error: {
                                         message : "Permission Denied!"
                                     }});
@@ -79,7 +79,7 @@ exports.createProduct = (req, res) => {
 exports.getAllProducts = (req, res) => {
     Product.Product.find({},function(err,allProducts){
         if(err){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "Bad request!"
                 }});
@@ -99,7 +99,7 @@ exports.getProductsByName = (req,res)=>{
     var keywords = req.body.name.split(' ');
     Product.Product.find({},function(err,allProducts){
         if(err){
-            res.status(400).send({
+            res.status(200).send({
                 error: {
                     message : "Bad request!"
                 }});
@@ -127,7 +127,7 @@ exports.getProductsByName = (req,res)=>{
 exports.getProductsByCategory = (req,res)=>{
     Product.Product.find({category : req.body.category},function(err,allProducts){
             if(err){
-                res.status(400).send({
+                res.status(200).send({
                     error: {
                         message : "Bad request!"
                     }});
@@ -144,7 +144,7 @@ exports.getProductsByCategory = (req,res)=>{
 exports.getProductsByBrand = (req,res)=>{
     Product.Product.find({brand : req.body.brand},function(err,allProducts){
             if(err){
-                res.status(400).send({
+                res.status(200).send({
                     error: {
                         message : "Bad request!"
                     }});

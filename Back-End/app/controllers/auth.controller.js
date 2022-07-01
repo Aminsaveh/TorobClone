@@ -54,7 +54,7 @@ exports.signup = (req, res) => {
 
         user.save((err, resu) => {
           if (err) {
-              res.status(400).send({
+              res.status(200).send({
                   error: {
                       message : "Bad request!"
                   }});
@@ -68,7 +68,7 @@ exports.signup = (req, res) => {
           })
           user.save((err,resu) => {
             if(err){
-              res.status(400).send({
+              res.status(200).send({
                 error: {
                     message : "Bad request!"
                 }});
@@ -85,7 +85,7 @@ exports.signup = (req, res) => {
           });
         });
       }else{
-        res.status(400).send({
+        res.status(200).send({
           error: {
               message : "Bad request!"
           }});
@@ -99,14 +99,14 @@ exports.signin = (req, res) => {
   })
     .exec((err, user) => {
       if (err) {
-        res.status(400).send({
+        res.status(200).send({
             error: {
                 message : "Phone Not Found"
             }});
         return;
       }
       if (!user) {
-        return    res.status(400).send({
+        return    res.status(200).send({
             error: {
                 message : "Phone Not Found"
             }});
@@ -116,7 +116,7 @@ exports.signin = (req, res) => {
         user.password
       );
       if (!passwordIsValid) {
-        return  res.status(400).send({
+        return  res.status(200).send({
             error: {
                 message : "Password Is Incorrect!"
             }});
@@ -141,7 +141,7 @@ exports.sendSmsVerification = (req, res) => {
     template : 'Your verification code is %token.'}, function (err, response) {
     if (err) {
         console.log(err);
-        res.status(400).send({
+        res.status(200).send({
             error: {
                 message : "Bad request!"
             }});
@@ -153,7 +153,7 @@ exports.sendSmsVerification = (req, res) => {
       })
       sms.save((err, resu) => {
           if(err){
-            res.status(400).send({
+            res.status(200).send({
               error: {
                   message : "Bad request!"
               }});
@@ -175,7 +175,7 @@ exports.verifySmsCode = (req, res) => {
   messagebird.verify.verify(id, token, function(err, response) {
     if (err) {
       console.log(err);
-      res.status(400).send({
+      res.status(200).send({
         error: {
             message : "Bad request!"
         }});

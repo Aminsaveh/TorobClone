@@ -8,21 +8,21 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
       phone: req.body.phone
     }).exec((err, user) => {
       if (err) {
-        res.status(400).send({
+        res.status(200).send({
             error: {
                 message : "Bad request!"
             }});
         return;
       }
       if (user) {
-        res.status(400).send({
+        res.status(200).send({
             error: {
                 message : "Phone Has Already Exists!"
             }});
         return;
       }
       if(req.body.password.length<8 || !/[0-9]/.test(req.body.password) || !/[a-z]/.test(req.body.password) || !/[A-Z]/.test(req.body.password)){
-        res.status(400).send({
+        res.status(200).send({
           error: {
               message : "Password Is Weak!"
           }});
