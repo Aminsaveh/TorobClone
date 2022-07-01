@@ -3,11 +3,6 @@ const cors = require("cors");
 const app = express();
 const db = require("./app/models");
 const dbConfig = require("./app/config/db.config");
-
-var corsOptions = {
-  origin: "http://localhost:8080"
-};
-app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 // simple route
 function defaultContentTypeMiddleware (req, res, next) {
@@ -20,6 +15,7 @@ app.use(express.json());
 
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/product.routes')(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
@@ -29,10 +25,7 @@ app.listen(PORT, () => {
 
 
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(`mongodb+srv://Aminsaveh:Doroodi1380@cluster0.sg1iwur.mongodb.net/?retryWrites=true&w=majority`,)
   .then(() => {
     console.log("Successfully connect to MongoDB.");
 

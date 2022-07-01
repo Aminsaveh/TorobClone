@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { StoreSchema } = require("./store.model");
 const ProductSchema =  new mongoose.Schema({
   id           : {type : Number},
+  price        : {type : Number},
   name         : {type : String},
   category     : {type : String},
   brand        : {type : String},
