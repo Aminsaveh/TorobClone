@@ -47,6 +47,7 @@ exports.createProduct = (req, res) => {
                             return;
                     }
                     var product = new Product.Product({
+                        id       : result,
                         name     : req.body.name,
                         price    : req.body.price,
                         category : req.body.category,
