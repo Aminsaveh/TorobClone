@@ -92,7 +92,7 @@ exports.addStore = (req, res) => {
                 }});
                 return;
         }
-        Product.Product.find({id : req.body.productId},function(err,product){
+        Product.Product.findOne({id : req.body.productId},function(err,product){
                 if(err){
                     res.status(200).send({
                         error: {
@@ -120,7 +120,22 @@ exports.addStore = (req, res) => {
                     storeId : req.body.storeId
             })
             product.price = req.body.price;
+            console.log(product.stores);
+            if(!product.stores)
+                product.stores = [];
             product.stores.push(productStore);
+            product.updateOne({price :product.price , stores : product.stores }, (err, result) => {
+                    if(err){
+                        res.status(200).send({
+                            error: {
+                                message : "Bad request!"
+                            }});
+                            return;
+                    }
+                    res.status(200).send({
+                        message : "successful"
+                      });
+            });
         });
     });
 }
