@@ -92,3 +92,66 @@ exports.getAllProducts = (req, res) => {
 
     });
 }
+
+
+exports.getProductsByName = (req,res)=>{
+    var keywords = req.body.name.split(' ');
+    Product.Product.find({},function(err,allProducts){
+        if(err){
+            res.status(400).send({
+                error: {
+                    message : "Bad request!"
+                }});
+                return;
+        }
+        var chosenProducts = [];
+        keywords.some(element => {
+            allProducts.map(p => {
+                    if(p.name.toLowerCase().includes(element.toLowerCase())){
+                        chosenProducts.push(p);
+                    }
+                });
+            });
+            if(chosenProducts.length === 0)
+                chosenProducts = allProducts;
+        res.status(200).send({
+            products: chosenProducts,
+            message : "successful"
+          });
+
+    });
+}
+
+
+exports.getProductsByCategory = (req,res)=>{
+    Product.Product.find({category : req.body.category},function(err,allProducts){
+            if(err){
+                res.status(400).send({
+                    error: {
+                        message : "Bad request!"
+                    }});
+                    return;
+            }
+            res.status(200).send({
+                products: allProducts,
+                message : "successful"
+              });
+    });
+}
+
+
+exports.getProductsByBrand = (req,res)=>{
+    Product.Product.find({brand : req.body.brand},function(err,allProducts){
+            if(err){
+                res.status(400).send({
+                    error: {
+                        message : "Bad request!"
+                    }});
+                    return;
+            }
+            res.status(200).send({
+                products: allProducts,
+                message : "successful"
+              });
+    });
+}

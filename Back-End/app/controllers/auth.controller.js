@@ -35,7 +35,6 @@ exports.signup = (req, res) => {
            user = new NormalUser({
               id        : result,
               name      : req.body.name,
-              email     : req.body.email,
               phone     : req.body.phone,
               password  : bcrypt.hashSync(req.body.password, 8),
               favorites : [],
@@ -46,7 +45,6 @@ exports.signup = (req, res) => {
               user = new StoreOwner({
               id        : result,
               name      : req.body.name,
-              email     : req.body.email,
               phone     : req.body.phone,
               password  : bcrypt.hashSync(req.body.password, 8),
               stores    : []
@@ -65,7 +63,6 @@ exports.signup = (req, res) => {
           var user = new User.User({
             id        : result,
             name      : req.body.name,
-            email     : req.body.email,
             phone     : req.body.phone,
             password  : bcrypt.hashSync(req.body.password, 8),
           })
@@ -98,20 +95,20 @@ exports.signup = (req, res) => {
 };
 exports.signin = (req, res) => {
   User.User.findOne({
-    email: req.body.email
+    phone: req.body.phone
   })
     .exec((err, user) => {
       if (err) {
         res.status(400).send({
             error: {
-                message : "Bad request!"
+                message : "Phone Not Found"
             }});
         return;
       }
       if (!user) {
         return    res.status(400).send({
             error: {
-                message : "Bad request!"
+                message : "Phone Not Found"
             }});
       }
       var passwordIsValid = bcrypt.compareSync(
@@ -121,7 +118,7 @@ exports.signin = (req, res) => {
       if (!passwordIsValid) {
         return  res.status(400).send({
             error: {
-                message : "Bad request!"
+                message : "Password Is Incorrect!"
             }});
       }
       var jwtToken = jwt.sign({ id: user.id }, config.secret, {
@@ -149,7 +146,7 @@ exports.sendSmsVerification = (req, res) => {
                 message : "Bad request!"
             }});
       return;
-    } else {
+    } else { 
       sms = new Sms({
         userEmail : req.body.email,
         id        : response.id

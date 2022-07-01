@@ -9,7 +9,7 @@ function defaultContentTypeMiddleware (req, res, next) {
   req.headers['content-type'] = 'application/json';
   next();
 }
-
+app.use(cors());
 app.use(defaultContentTypeMiddleware);
 app.use(express.json());
 
