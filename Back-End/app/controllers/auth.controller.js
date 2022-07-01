@@ -5,6 +5,8 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 const { NormalUser } = require("../models/normaluser.model");
 const { StoreOwner } = require("../models/storeowner.model");
+const { Sms } = require("../models/smscodes.model");
+var messagebird = require('messagebird')('nIrHEeySrImyLDh0eLFSEktBE');
 const Counters = db.counters;
 
 function getNextSequence(name, callback) {
@@ -131,3 +133,60 @@ exports.signin = (req, res) => {
       });
     });
 };
+
+exports.sendSmsVerification = (req, res) => {
+  console.log(req.body.phone);
+  var number = "+98"+req.body.phone;
+  console.log(number)
+  messagebird.verify.create(number, {
+    originator : 'TorobClone',
+    timeout    : 600,
+    template : 'Your verification code is %token.'}, function (err, response) {
+    if (err) {
+        console.log(err);
+        res.status(400).send({
+            error: {
+                message : "Bad request!"
+            }});
+      return;
+    } else {
+      sms = new Sms({
+        userEmail : req.body.email,
+        id        : response.id
+      })
+      sms.save((err, resu) => {
+          if(err){
+            res.status(400).send({
+              error: {
+                  message : "Bad request!"
+              }});
+            return;
+          }
+        res.status(200).send({
+          id: response.id,
+          message : "successful"
+        });
+      });
+    }
+});
+};
+
+
+exports.verifySmsCode = (req, res) => {
+  var id = req.body.id;
+  var token = req.body.token;
+  messagebird.verify.verify(id, token, function(err, response) {
+    if (err) {
+      console.log(err);
+      res.status(400).send({
+        error: {
+            message : "Bad request!"
+        }});
+      return;
+    } else {
+      res.status(200).send({
+        message : "successful"
+      });
+    }
+  });
+}
