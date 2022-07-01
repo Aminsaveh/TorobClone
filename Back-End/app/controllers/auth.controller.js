@@ -3,6 +3,8 @@ const db = require("../models");
 const User = db.user;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { NormalUser } = require("../models/normaluser.model");
+const { StoreOwner } = require("../models/storeowner.model");
 const Counters = db.counters;
 
 function getNextSequence(name, callback) {
@@ -26,13 +28,31 @@ function getNextSequence(name, callback) {
 exports.signup = (req, res) => {
   getNextSequence("userId", function(err, result){
       if(!err){
-          const user = new User.User({
-          id : result,
-          name: req.body.name,
-          email: req.body.email,
-          password: bcrypt.hashSync(req.body.password, 8),
-        });
-        user.save((err, result) => {
+          var user = new User.User(); 
+          if(req.body.userType == "normal"){
+           user = new NormalUser({
+              id        : result,
+              name      : req.body.name,
+              email     : req.body.email,
+              phone     : req.body.phone,
+              password  : bcrypt.hashSync(req.body.password, 8),
+              favorites : [],
+              latest    : []
+            })
+          }
+          else if(req.body.userType == "storeOwner"){
+              user = new StoreOwner({
+              id        : result,
+              name      : req.body.name,
+              email     : req.body.email,
+              phone     : req.body.phone,
+              password  : bcrypt.hashSync(req.body.password, 8),
+              stores    : []
+            })
+          }
+
+
+        user.save((err, resu) => {
           if (err) {
               res.status(400).send({
                   error: {
@@ -40,13 +60,30 @@ exports.signup = (req, res) => {
                   }});
             return;
           }
-          var jwtToken = jwt.sign({ id: user.id }, config.secret, {
+          var user = new User.User({
+            id        : result,
+            name      : req.body.name,
+            email     : req.body.email,
+            phone     : req.body.phone,
+            password  : bcrypt.hashSync(req.body.password, 8),
+          })
+          user.save((err,resu) => {
+            if(err){
+              res.status(400).send({
+                error: {
+                    message : "Bad request!"
+                }});
+              return;
+            }
+            var jwtToken = jwt.sign({ id: user.id }, config.secret, {
               expiresIn: 86400 // 24 hours
           });
           res.status(200).send({
               token: jwtToken,
               message : "successful"
             });
+
+          });
         });
       }else{
         res.status(400).send({
