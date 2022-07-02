@@ -1,11 +1,10 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
 import Layout from "../components/template/Layout"
-import { AppRoutes } from "../utilities/AppRoutes"
-import gamingDesk from "../images/gaming-desk.jpg"
 import { Icons } from "../utilities/Icons"
 import { useParams } from "react-router-dom"
 import { getProductById } from "../utilities/functions/getProductById"
+import { addProductToUserRecent } from "../utilities/functions/addProductToUserRecent"
 
 const Product = () => {
     // States and Hooks
@@ -27,8 +26,13 @@ const Product = () => {
         setLoading(false)
     }
 
+    const addToRecent = async () => {
+        await addProductToUserRecent({ id })
+    }
+
     useEffect(() => {
         fetchProductById()
+        addToRecent()
     }, [])
 
     // Render

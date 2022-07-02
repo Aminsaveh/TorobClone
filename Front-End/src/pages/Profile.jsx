@@ -5,10 +5,12 @@ import Product from "../components/template/Product"
 import Layout from "../components/template/Layout"
 import SideMenu from "../components/Profile/SideMenu"
 import { getUserFavorites } from "../utilities/functions/getUserFavorites"
+import { getUserRecentProducts } from "../utilities/functions/getUserRecentProducts"
 
 const Profile = () => {
     // States and Hooks
     const [favorites, setFavorites] = useState([])
+    const [recent, setRecent] = useState([])
     const [loading, setLoading] = useState(true)
     const { offcanvasMenuShow, setOffcanvasMenuShow, profileSideMenuSelected } =
         useApp()
@@ -21,8 +23,16 @@ const Profile = () => {
         setLoading(false)
     }
 
+    const fetchRecent = async () => {
+        setLoading(true)
+        const response = await getUserRecentProducts()
+        setRecent(response.latest)
+        setLoading(false)
+    }
+
     useEffect(() => {
         fetchFavorites()
+        fetchRecent()
     }, [])
 
     // Render
@@ -62,6 +72,27 @@ const Profile = () => {
                         {profileSideMenuSelected === "favorites" && (
                             <div className="row m-0 pt-2">
                                 {favorites.map(item => {
+                                    return (
+                                        <div
+                                            className="col-12 col-sm-6 col-md-4 col-lg-4 px-2 pb-4 px-lg-1 pb-lg-2"
+                                            key={item}
+                                        >
+                                            <Product
+                                                favorite={true}
+                                                id={item.id}
+                                                name={item.name}
+                                                price={item.price}
+                                                stores={item.stores}
+                                                image={item.imageUrl}
+                                            />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )}
+                        {profileSideMenuSelected === "recent" && (
+                            <div className="row m-0 pt-2">
+                                {recent.map(item => {
                                     return (
                                         <div
                                             className="col-12 col-sm-6 col-md-4 col-lg-4 px-2 pb-4 px-lg-1 pb-lg-2"
