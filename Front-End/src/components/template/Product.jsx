@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { addProductToFavorites } from "../../utilities/functions/addProductToFavorites"
 import { getUserToken } from "../../utilities/functions/getUserToken"
+import { removeProductFromFavorites } from "../../utilities/functions/removeProductFromFavorites"
 
 const Product = ({ favorite, id, name, price, stores, image }) => {
     const [inform, setInform] = useState(false)
@@ -12,6 +13,7 @@ const Product = ({ favorite, id, name, price, stores, image }) => {
     const addToFavorites = async () => {
         if (getUserToken()) {
             if (!like) await addProductToFavorites({ id })
+            else await removeProductFromFavorites({ id })
         } else alert("Please sign in first")
     }
 
