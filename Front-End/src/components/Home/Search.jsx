@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useApp } from "../../providers/AppProvider"
 import { AppRoutes } from "../../utilities/AppRoutes"
+import { getAllProducts } from "../../utilities/functions/getAllProducts"
 import { searchProductsByName } from "../../utilities/functions/searchProductsByName"
 
 const Search = () => {
@@ -13,10 +14,18 @@ const Search = () => {
 
     // Methods
     const onSearchButtonClick = async () => {
-        if (!searchInputValue) return
         setLoading(true)
-        const response = await searchProductsByName({ name: searchInputValue })
-        setProducts(response.products)
+
+        if (searchInputValue) {
+            const response = await searchProductsByName({
+                name: searchInputValue,
+            })
+            setProducts(response.products)
+        } else {
+            const response = await getAllProducts()
+            setProducts(response.products)
+        }
+
         navigator(AppRoutes.products)
         setLoading(false)
     }
