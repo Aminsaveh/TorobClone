@@ -28,7 +28,7 @@ const Product = ({ favorite, id, name, price, stores, image }) => {
                     alt={name}
                     onClick={() => navigator(`/product/${id}`)}
                 />
-                <div className="product-title pb-2 pb-sm-3 pb-md-4 pb-lg-5 text-start">
+                <div className="product-title mt-3 pb-2 pb-sm-3 pb-md-4 pb-lg-5 text-start fw-bold">
                     {name}
                 </div>
                 <div className="product-price fw-bold text-start pb-2">
