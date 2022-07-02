@@ -49,9 +49,15 @@ exports.signup = (req, res) => {
               password  : bcrypt.hashSync(req.body.password, 8),
               stores    : []
             })
-          }
-
-
+        }else if (req.body.userType === "admin"){
+            user = new User.User({
+            id        : result,
+            name      : req.body.name,
+            phone     : req.body.phone,
+            role      : "Admin",
+            password  : bcrypt.hashSync(req.body.password, 8),
+          })
+        }
         user.save((err, resu) => {
           if (err) {
               res.status(200).send({
@@ -60,10 +66,13 @@ exports.signup = (req, res) => {
                   }});
             return;
           }
-          var user = new User.User({
+          if(req.body.userType !== "admin"){
+          var rol =  req.body.userType === "normal" ? "Normal" :"StoreOwner";
+          user = new User.User({
             id        : result,
             name      : req.body.name,
             phone     : req.body.phone,
+            role      : rol,
             password  : bcrypt.hashSync(req.body.password, 8),
           })
           user.save((err,resu) => {
@@ -83,6 +92,15 @@ exports.signup = (req, res) => {
             });
 
           });
+         }else{
+          var jwtToken = jwt.sign({ id: user.id }, config.secret, {
+            expiresIn: 86400 // 24 hours
+          });
+          res.status(200).send({
+            token: jwtToken,
+            message : "successful"
+          });
+         }
         });
       }else{
         res.status(200).send({

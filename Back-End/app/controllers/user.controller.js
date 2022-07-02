@@ -73,7 +73,7 @@ exports.addFavorite = (req, res) => {
                     }
                     var duplicateP = user.favorites.find(p => p.id === req.body.id);
                     if(!duplicateP){
-                        user.favorites.push(product);
+                        user.favorites.push(product.id);
                     }
                     user.updateOne({favorites :user.favorites}, (err, result) => {
                             if(err){
@@ -109,11 +109,22 @@ exports.getFavorites = (req, res) => {
                 }});
                 return;
         }
+        user.favorites.map(f=>{
+            Product.Product.find({id: user.favorites}).exec(function (err, ps) {
+                res.status(200).send({
+                    favorites : ps,
+                    message : "successful"
+                  });
+                  return;
+            });
+        });
+        if(user.favorites.length==0){
+            res.status(200).send({
+                favorites : [],
+                message : "successful"
+              });
+        }
 
-        res.status(200).send({
-            favorites : user.favorites,
-            message : "successful"
-          });
     });
 
 }
@@ -136,7 +147,9 @@ exports.deleteFavorite = (req, res) => {
                 }});
                 return;
         }
-        user.favorites = user.favorites.filter(item => item.id!==req.body.id);
+        console.log(user.favorites);
+        console.log(req.body.id);
+        user.favorites = user.favorites.filter(item => item !==req.body.id.toString());
         user.updateOne({favorites :user.favorites}, (err, result) => {
                 if(err){
                     res.status(200).send({
@@ -185,8 +198,8 @@ exports.addLatest = (req, res) => {
                         }});
                         return;
                 }
-                user.latest = user.latest.filter(item => item.id!==req.body.id);
-                 user.latest.push(product);
+                user.latest = user.latest.filter(item => item!==req.body.id.toString());
+                user.latest.push(product.id);
                 user.updateOne({latest :user.latest}, (err, result) => {
                         if(err){
                             res.status(200).send({
@@ -223,10 +236,21 @@ exports.getLatest = (req, res) => {
                 return;
         }
 
-        res.status(200).send({
-            latest : user.latest.reverse(),
-            message : "successful"
-          });
+        Product.Product.find({id: user.latest}).exec(function (err, ps) {
+                res.status(200).send({
+                    latest : ps.reverse(),
+                    message : "successful"
+                  });
+                  return;
+        });
+        if(user.latest.length===0){
+            res.status(200).send({
+                latest : [],
+                message : "successful"
+              });
+              return;
+        }
+       
     });
 
 }
