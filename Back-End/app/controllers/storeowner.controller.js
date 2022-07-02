@@ -1,5 +1,6 @@
 const { Store } = require("../models/store.model");
 const { StoreOwner } = require("../models/storeowner.model");
+const { User } = require("../models/user.model");
 const db = require("../models");
 const Counters = db.counters;
 
@@ -56,7 +57,7 @@ exports.addStore = (req,res)=>{
                             reports : [],
                             products: []
                         });
-                    user.stores.push(store);
+                    user.stores.push(store.id);
                     store.save((err, resu) => {
                             if(err){
                                 console.log(err);
@@ -98,5 +99,59 @@ exports.getStores = (req,res)=>{
                 stores  : stores,
                 message : "successful"
               });
+    });
+}
+
+
+exports.updateProfile = (req,res)=>{
+    StoreOwner.findOne({id:req.userId}).exec(function (err, user) {
+        if(err){
+            res.status(200).send({
+                error: {
+                    message : "Bad request!"
+                }});
+                return;
+        }
+        if(!user){
+            res.status(200).send({
+                error: {
+                    message : "User Not Found!"
+                }});
+                return;
+        }
+        user.name = req.body.name;
+        user.phone = req.body.phone;
+        user.updateOne({name : user.name, phone : user.phone}, (err, result) => {
+                if(err){
+                    res.status(200).send({
+                        error: {
+                            message : "Bad request!"
+                        }});
+                        return;
+                }
+                User.findOne({id:req.userId}).exec(function (err, use) {
+                        if(err){
+                            res.status(200).send({
+                                error: {
+                                    message : "Bad request!"
+                                }});
+                                return;
+                        }
+                        use.name = req.body.name;
+                        use.phone = req.body.phone;
+                        use.updateOne({name : use.name, phone : use.phone}, (err, result) => {
+                            if(err){
+                                res.status(200).send({
+                                    error: {
+                                        message : "Bad request!"
+                                    }});
+                                    return;
+                            }
+                            res.status(200).send({
+                                message : "successful"
+                              });
+                        });
+                });
+        });
     });
 }

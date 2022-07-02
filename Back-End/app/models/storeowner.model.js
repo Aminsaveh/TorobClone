@@ -4,7 +4,7 @@ const { StoreSchema } = require("./store.model");
 const { UserSchema } = require("./user.model");
 
 const StoreOwnerSchema = extendSchema(UserSchema,{
-    stores    : {type : [StoreSchema]}
+    stores    : {type : [String]}
 });
 
 const StoreOwner = mongoose.model(

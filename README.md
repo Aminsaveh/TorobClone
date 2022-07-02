@@ -1,8 +1,31 @@
 # TorobClone
+# Why?
+<p align="center">
+    <b>Internet Engineering Course Final Project(Spring 2022)
+</p>
 
-Implementing TorobClone As Final Project Of Internet Engineering Course @ SBU
 
 
+# Use : 
+- HTML 
+- CSS
+- Bootstrap
+- ReactJS
+- NodeJS
+- MongoDB
+
+
+# Data :
+
+[Torob Website](https://www.Torob.com) 
+
+# How To Install?
+- `npm install`
+
+# How To Run?
+- `npm start`
+
+# Final Result 
 # SignUp & Login
 
 ![SignUpLogin](Images/SignUpLogin.jpeg)
@@ -24,3 +47,13 @@ Implementing TorobClone As Final Project Of Internet Engineering Course @ SBU
 # ProfilePage
 
 ![ProfilePage](Images/ProfilePage.jpeg)
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const ReportSchema =  new mongoose.Schema({
+  id               : {type : Number},
   userId           : {type : Number},
   productId        : {type : Number},
-  kind             : {type : String, enum : ["InCorrectDetails","InCorrectPrice"]}
+  kind             : {type : String}
 });
 const Report = mongoose.model(
   "Report",

@@ -107,8 +107,7 @@ exports.addStore = (req, res) => {
                         }});
                         return;
                 }
-            var shop = user.stores.find(s=>s.id === req.body.storeId);
-            if(!shop){
+            if(!user.stores.includes(req.body.storeId.toString())){
                 res.status(200).send({
                     error: {
                         message : "No Shop Found!"
@@ -120,7 +119,6 @@ exports.addStore = (req, res) => {
                     storeId : req.body.storeId
             })
             product.price = req.body.price;
-            console.log(product.stores);
             if(!product.stores)
                 product.stores = [];
             product.stores.push(productStore);
@@ -132,9 +130,29 @@ exports.addStore = (req, res) => {
                             }});
                             return;
                     }
-                    res.status(200).send({
-                        message : "successful"
-                      });
+                    Store.findOne({id : req.body.storeId },function(err,st){
+                        if(err){
+                            res.status(200).send({
+                                error: {
+                                    message : "Bad request!"
+                                }});
+                                return;
+                        }
+                        console.log(st)
+                        st.products.push(req.body.productId);
+                        st.updateOne({products :st.products}, (err, result) => {
+                                if(err){
+                                    res.status(200).send({
+                                        error: {
+                                            message : "Bad request!"
+                                        }});
+                                        return;
+                                }
+                                res.status(200).send({
+                                    message : "successful"
+                                  });
+                        });
+                    });
             });
         });
     });

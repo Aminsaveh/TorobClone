@@ -3,8 +3,8 @@ const extendSchema = require('mongoose-extend-schema');
 const { ProductSchema } = require("./product.model");
 const { UserSchema } = require("./user.model");
 const NormalUserSchema = extendSchema(UserSchema,{
-    favorites : {type : [ProductSchema]},
-    latest : {type : [ProductSchema]},
+    favorites : {type : [String]},
+    latest : {type : [String]},
 });
 
 const NormalUser = mongoose.model(

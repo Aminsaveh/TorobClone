@@ -8,7 +8,6 @@ module.exports = function(app) {
       next();
     });
 
-
-    app.post("/api/v1/report/:shopId"   ,[authJwt.verifyToken], controller.report);
+    app.post("/api/v1/report/:shopId"           ,[authJwt.verifyToken], controller.report);
     app.get( "/api/v1/report/:shopId"           ,[authJwt.verifyToken], controller.getReports)
 };

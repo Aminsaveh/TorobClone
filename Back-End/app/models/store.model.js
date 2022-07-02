@@ -6,7 +6,7 @@ const StoreSchema =  new mongoose.Schema({
   ownerId        : {type : Number},
   name           : {type : String},
   city           : {type : String},
-  reports        : {type : [ReportSchema]},
+  reports        : {type : [String]},
   products       : {type : [String]},
 });
 const Store = mongoose.model(
