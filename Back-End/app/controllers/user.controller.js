@@ -253,13 +253,6 @@ exports.getLatest = (req, res) => {
             return;
         }
 
-        Product.Product.find({ id: user.latest }).exec(function (err, ps) {
-            res.status(200).send({
-                latest: ps.reverse(),
-                message: "successful"
-            });
-            return;
-        });
         if (user.latest.length === 0) {
             res.status(200).send({
                 latest: [],
@@ -267,6 +260,14 @@ exports.getLatest = (req, res) => {
             });
             return;
         }
+        Product.Product.find({ id: user.latest }).exec(function (err, ps) {
+            res.status(200).send({
+                latest: ps.reverse(),
+                message: "successful"
+            });
+            return;
+        });
+
 
     });
 
