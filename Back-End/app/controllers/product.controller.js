@@ -239,3 +239,20 @@ exports.getProductsByBrand = (req,res)=>{
               });
     });
 }
+
+
+exports.getProductsById = (req,res)=>{
+    Product.Product.findOne({id : req.body.id},function(err,p){
+            if(err){
+                res.status(200).send({
+                    error: {
+                        message : "Bad request!"
+                    }});
+                    return;
+            }
+            res.status(200).send({
+                product: p,
+                message : "successful"
+              });
+    });
+}
