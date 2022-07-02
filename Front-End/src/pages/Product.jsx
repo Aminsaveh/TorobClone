@@ -16,6 +16,9 @@ const Product = () => {
     const [loading, setLoading] = useState(true)
     const [product, setProduct] = useState(null)
 
+    const addThousandsSeparator = num =>
+        num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
     // Methods
     const fetchProductById = async () => {
         setLoading(true)
@@ -40,7 +43,7 @@ const Product = () => {
                             <div className="row m-0 align-items-center">
                                 <div className="col-12 col-sm-4 col-md-3 p-2 text-center">
                                     <img
-                                        src={gamingDesk}
+                                        src={product.imageUrl}
                                         alt="product-image"
                                         className="img-fluid"
                                     />
@@ -48,12 +51,14 @@ const Product = () => {
                                 <div className="col-12 col-sm-8 col-md-9">
                                     <div className="row m-0">
                                         <div className="col-12 fs-18px mb-2 mb-md-4 text-center text-sm-start">
-                                            میز گیمینگ Eureka مدل Gaming General
-                                            Series
+                                            {product.name}
                                         </div>
 
                                         <div className="col-12 text-danger mb-2 text-center text-sm-start">
-                                            از 9,300,000 تومان تا 15,500,000
+                                            از{" "}
+                                            {addThousandsSeparator(
+                                                product.price
+                                            )}{" "}
                                             تومان
                                         </div>
 
