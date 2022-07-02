@@ -12,6 +12,7 @@ import SignOutModal from "../modals/SignOutModal"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { searchProductsByName } from "../../utilities/functions/searchProductsByName"
 import { getAllProducts } from "../../utilities/functions/getAllProducts"
+import { searchByCategory } from "../../utilities/functions/searchByCategory"
 
 const NavBar = () => {
     const location = useLocation()
@@ -38,6 +39,13 @@ const NavBar = () => {
         }
         setLoading(false)
         navigator(AppRoutes.products)
+    }
+
+    const searchByCategoryName = async category => {
+        const response = await searchByCategory({
+            category,
+        })
+        setProducts(response.products)
     }
 
     return (
@@ -143,29 +151,28 @@ const NavBar = () => {
                                             return (
                                                 <div className="col-6 col-sm-4 col-md-3 col-lg-2 p-0 text-dark">
                                                     <div className="fw-bold">
-                                                        <Link
-                                                            to={
-                                                                subItemCategory.link
+                                                        <button
+                                                            className="btn p-0 text-decoration-underline fw-bold"
+                                                            onClick={() =>
+                                                                searchByCategoryName(
+                                                                    subItemCategory.category
+                                                                )
                                                             }
                                                         >
                                                             {
                                                                 subItemCategory.title
                                                             }
-                                                        </Link>
+                                                        </button>
                                                     </div>
                                                     {subItemCategory.subItems.map(
                                                         subItem => {
                                                             return (
                                                                 <div className="text-secondary hover-dark py-1">
-                                                                    <Link
-                                                                        to={
-                                                                            subItem.link
-                                                                        }
-                                                                    >
+                                                                    <button className="btn p-0">
                                                                         {
                                                                             subItem.title
                                                                         }
-                                                                    </Link>
+                                                                    </button>
                                                                 </div>
                                                             )
                                                         }
