@@ -5,7 +5,6 @@ import SideMenu from "../components/Products/SideMenu"
 import { Offcanvas } from "react-bootstrap"
 import gamingDesk from "../images/gaming-desk.jpg"
 import { useApp } from "../providers/AppProvider"
-import { useNavigate } from "react-router-dom"
 
 const Products = () => {
     const {
@@ -15,8 +14,6 @@ const Products = () => {
         setOffcanvasMenuShow,
         products,
     } = useApp()
-
-    const navigator = useNavigate()
 
     const [filter, setFilter] = useState(2)
     const filteredProducts =

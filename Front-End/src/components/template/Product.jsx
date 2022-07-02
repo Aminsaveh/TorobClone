@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom"
 import { addProductToFavorites } from "../../utilities/functions/addProductToFavorites"
 import { getUserToken } from "../../utilities/functions/getUserToken"
 
-const Product = ({ id, name, price, stores, image }) => {
+const Product = ({ favorite, id, name, price, stores, image }) => {
     const [inform, setInform] = useState(false)
-    const [like, setLike] = useState(false)
+    const [like, setLike] = useState(favorite === true)
     const navigator = useNavigate()
 
     const addToFavorites = async () => {
