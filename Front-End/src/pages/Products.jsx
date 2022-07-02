@@ -92,11 +92,9 @@ const Products = () => {
                                 <div
                                     className="col-12 col-sm-6 col-md-4 col-lg-4 px-2 pb-4 px-lg-1 pb-lg-2"
                                     key={item}
-                                    onClick={() =>
-                                        navigator(`/product/${item.id}`)
-                                    }
                                 >
                                     <Product
+                                        id={item.id}
                                         name={item.name}
                                         price={item.price}
                                         stores={item.stores}
