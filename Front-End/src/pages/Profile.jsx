@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { Offcanvas } from "react-bootstrap"
-import gamingDesk from "../images/gaming-desk.jpg"
 import { useApp } from "../providers/AppProvider"
 import Product from "../components/template/Product"
 import Layout from "../components/template/Layout"
@@ -9,7 +8,7 @@ import { getUserFavorites } from "../utilities/functions/getUserFavorites"
 
 const Profile = () => {
     // States and Hooks
-    const [products, setProducts] = useState([])
+    const [favorites, setFavorites] = useState([])
     const [loading, setLoading] = useState(true)
     const { offcanvasMenuShow, setOffcanvasMenuShow, profileSideMenuSelected } =
         useApp()
@@ -18,8 +17,7 @@ const Profile = () => {
     const fetchFavorites = async () => {
         setLoading(true)
         const response = await getUserFavorites()
-        console.log(response)
-        setProducts(response.favorites)
+        setFavorites(response.favorites)
         setLoading(false)
     }
 
@@ -63,7 +61,7 @@ const Profile = () => {
 
                         {profileSideMenuSelected === "favorites" && (
                             <div className="row m-0 pt-2">
-                                {products.map(item => {
+                                {favorites.map(item => {
                                     return (
                                         <div
                                             className="col-12 col-sm-6 col-md-4 col-lg-4 px-2 pb-4 px-lg-1 pb-lg-2"

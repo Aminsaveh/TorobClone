@@ -1,27 +1,37 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Product from "../components/template/Product"
 import Layout from "../components/template/Layout"
 import SideMenu from "../components/Products/SideMenu"
 import { Offcanvas } from "react-bootstrap"
-import gamingDesk from "../images/gaming-desk.jpg"
 import { useApp } from "../providers/AppProvider"
+import { getUserFavorites } from "../utilities/functions/getUserFavorites"
 
 const Products = () => {
     const {
+        products,
         stockFilter,
         setStockFilter,
         offcanvasMenuShow,
         setOffcanvasMenuShow,
-        products,
     } = useApp()
 
     const [filter, setFilter] = useState(2)
+    const [favorites, setFavorites] = useState([])
     const filteredProducts =
         filter === 3
             ? products.sort((a, b) => b.price - a.price)
             : filter === 4
             ? products.sort((a, b) => a.price - b.price)
             : products
+
+    const fetchFavorites = async () => {
+        const response = await getUserFavorites()
+        setFavorites(response.favorites)
+    }
+
+    useEffect(() => {
+        fetchFavorites()
+    }, [])
 
     return (
         <Layout>
@@ -91,6 +101,9 @@ const Products = () => {
                                     key={item}
                                 >
                                     <Product
+                                        favorite={favorites
+                                            .map(item => item.id)
+                                            .includes(item.id)}
                                         id={item.id}
                                         name={item.name}
                                         price={item.price}
@@ -115,13 +128,3 @@ const Products = () => {
 }
 
 export default Products
-
-const testProduct = {
-    name: "میز گیمینگ استارت گیم Gamin Desk StartGame RGB",
-    price: 4200000,
-    stores: [
-        { id: 1, name: "فروشگاه لیون" },
-        { id: 2, name: "فروشگاه لمپاف" },
-    ],
-    image: gamingDesk,
-}
