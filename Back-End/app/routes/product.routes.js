@@ -13,5 +13,6 @@ module.exports = function(app) {
     app.post("/api/v1/product/search"  ,controller.getProductsByName);
     app.get("/api/v1/product/getAll"   , controller.getAllProducts);
     app.post("/api/v1/product/getByCategory", controller.getProductsByCategory);
-    app.post("/api/v1/product/getByBrand", controller.getProductsByBrand);
+    app.post("/api/v1/product/getById", controller.getProductsById);
+    app.post("/api/v1/product/getByBrand"   , controller.getProductsByBrand);
   };
