@@ -50,7 +50,11 @@
 
 # ProfilePage
 
-![ProfilePage](Images/ProfilePage.jpeg)
+# Favorites
+![FavoritePage](Images/FavoritePage.jpeg)
+
+# Latest
+![LatestPage](Images/LatestPage.jpeg)
 
 
 

@@ -109,7 +109,6 @@ exports.getFavorites = (req, res) => {
                 }});
                 return;
         }
-        user.favorites.map(f=>{
             Product.Product.find({id: user.favorites}).exec(function (err, ps) {
                 res.status(200).send({
                     favorites : ps,
@@ -117,7 +116,6 @@ exports.getFavorites = (req, res) => {
                   });
                   return;
             });
-        });
         if(user.favorites.length==0){
             res.status(200).send({
                 favorites : [],
