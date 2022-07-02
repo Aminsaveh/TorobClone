@@ -11,6 +11,7 @@ import SignUpModal from "../modals/SignUpModal"
 import SignOutModal from "../modals/SignOutModal"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { searchProductsByName } from "../../utilities/functions/searchProductsByName"
+import { getAllProducts } from "../../utilities/functions/getAllProducts"
 
 const NavBar = () => {
     const location = useLocation()
@@ -25,11 +26,17 @@ const NavBar = () => {
     const navigator = useNavigate()
 
     const onSearchButtonClick = async () => {
-        if (!searchInputValue) return
         setLoading(true)
-        const response = await searchProductsByName({ name: searchInputValue })
+        if (searchInputValue) {
+            const response = await searchProductsByName({
+                name: searchInputValue,
+            })
+            setProducts(response.products)
+        } else {
+            const response = await getAllProducts()
+            setProducts(response.products)
+        }
         setLoading(false)
-        setProducts(response.products)
         navigator(AppRoutes.products)
     }
 

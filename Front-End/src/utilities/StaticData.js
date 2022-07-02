@@ -9,6 +9,7 @@ export const HeaderItems = [
             {
                 title: "گوشی موبایل",
                 link: AppRoutes.home,
+                category: "Phone",
                 subItems: [
                     { title: "گوشی سامسونگ", link: AppRoutes.home },
                     { title: "گوشی شیائومی", link: AppRoutes.home },
@@ -18,6 +19,7 @@ export const HeaderItems = [
             {
                 title: "تبلت",
                 link: AppRoutes.home,
+                category: "Tablet",
                 subItems: [
                     { title: "تبلت سامسونگ", link: AppRoutes.home },
                     { title: "تبلت شیائومی", link: AppRoutes.home },
@@ -34,6 +36,7 @@ export const HeaderItems = [
             {
                 title: "لپتاپ",
                 link: AppRoutes.home,
+                category: "Laptop",
                 subItems: [
                     { title: "لپتاپ لنوو", link: AppRoutes.home },
                     { title: "لپتاپ ایسوس", link: AppRoutes.home },
