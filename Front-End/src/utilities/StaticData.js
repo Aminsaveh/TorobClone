@@ -11,9 +11,9 @@ export const HeaderItems = [
                 link: AppRoutes.home,
                 category: "Phone",
                 subItems: [
-                    { title: "گوشی سامسونگ", link: AppRoutes.home },
-                    { title: "گوشی شیائومی", link: AppRoutes.home },
-                    { title: "گوشی اپل", link: AppRoutes.home },
+                    { title: "گوشی سامسونگ", brand: "Samsung", link: AppRoutes.home },
+                    { title: "گوشی شیائومی", brand: "Xiaomi", link: AppRoutes.home },
+                    { title: "گوشی اپل", brand: "Apple", link: AppRoutes.home },
                 ],
             },
             {
@@ -21,9 +21,9 @@ export const HeaderItems = [
                 link: AppRoutes.home,
                 category: "Tablet",
                 subItems: [
-                    { title: "تبلت سامسونگ", link: AppRoutes.home },
-                    { title: "تبلت شیائومی", link: AppRoutes.home },
-                    { title: "تبلت اپل", link: AppRoutes.home },
+                    { title: "تبلت سامسونگ", brand: "Samsung", link: AppRoutes.home },
+                    { title: "تبلت شیائومی", brand: "Xiaomi", link: AppRoutes.home },
+                    { title: "تبلت اپل", brand: "Apple", link: AppRoutes.home },
                 ],
             },
         ],
@@ -38,9 +38,9 @@ export const HeaderItems = [
                 link: AppRoutes.home,
                 category: "Laptop",
                 subItems: [
-                    { title: "لپتاپ لنوو", link: AppRoutes.home },
-                    { title: "لپتاپ ایسوس", link: AppRoutes.home },
-                    { title: "لپتاپ اپل", link: AppRoutes.home },
+                    { title: "لپتاپ لنوو", brand: "Samsung", link: AppRoutes.home },
+                    { title: "لپتاپ ایسوس", brand: "Xiaomi", link: AppRoutes.home },
+                    { title: "لپتاپ اپل", brand: "Apple", link: AppRoutes.home },
                 ],
             },
         ],

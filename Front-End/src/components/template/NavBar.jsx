@@ -46,6 +46,19 @@ const NavBar = () => {
             category,
         })
         setProducts(response.products)
+        setMenuParentItemId(null)
+    }
+
+    const searchByCategoryBrand = async ({ category, brand }) => {
+        const response = await getAllProducts()
+        const allProducts = response.products
+        setProducts(
+            allProducts.filter(
+                product =>
+                    product.category === category && product.brand === brand
+            )
+        )
+        setMenuParentItemId(null)
     }
 
     return (
@@ -168,7 +181,18 @@ const NavBar = () => {
                                                         subItem => {
                                                             return (
                                                                 <div className="text-secondary hover-dark py-1">
-                                                                    <button className="btn p-0">
+                                                                    <button
+                                                                        className="btn p-0"
+                                                                        onClick={() =>
+                                                                            searchByCategoryBrand(
+                                                                                {
+                                                                                    category:
+                                                                                        subItemCategory.category,
+                                                                                    brand: subItem.brand,
+                                                                                }
+                                                                            )
+                                                                        }
+                                                                    >
                                                                         {
                                                                             subItem.title
                                                                         }
