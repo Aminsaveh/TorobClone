@@ -38,7 +38,7 @@ export const HeaderItems = [
                 link: AppRoutes.home,
                 category: "Laptop",
                 subItems: [
-                    { title: "لپتاپ لنوو", brand: "Samsung", link: AppRoutes.home },
+                    { title: "لپتاپ لنوو", brand: "Lenovo", link: AppRoutes.home },
                     { title: "لپتاپ ایسوس", brand: "Asus", link: AppRoutes.home },
                     { title: "لپتاپ اپل", brand: "Apple", link: AppRoutes.home },
                 ],
