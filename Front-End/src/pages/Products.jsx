@@ -4,7 +4,6 @@ import Layout from "../components/template/Layout"
 import SideMenu from "../components/Products/SideMenu"
 import { Offcanvas } from "react-bootstrap"
 import gamingDesk from "../images/gaming-desk.jpg"
-import { AppRoutes } from "../utilities/AppRoutes"
 import { useApp } from "../providers/AppProvider"
 import { useNavigate } from "react-router-dom"
 
@@ -46,18 +45,7 @@ const Products = () => {
 
                 <div className="col-12 col-lg-9 px-4">
                     <div className="row mx-3 d-none d-sm-flex m-0 border-bottom border-1 py-3 align-items-center">
-                        <div className="col-9 d-flex flex-wrap align-items-center text-secondary px-0 fs-12px">
-                            {/* {rootHistory.map((root, idx) => {
-                                return (
-                                    <>
-                                        <a href={root.link}>{root.title}</a>
-                                        {idx !== rootHistory.length - 1 && (
-                                            <span className="px-2">/</span>
-                                        )}
-                                    </>
-                                )
-                            })} */}
-                        </div>
+                        <div className="col-9 d-flex flex-wrap align-items-center text-secondary px-0 fs-12px"></div>
                         <div className="col-3 d-flex justify-content-end p-0">
                             <select
                                 className="form-select w-auto border-0 shadow-none fs-14px"
@@ -97,15 +85,6 @@ const Products = () => {
                                 </button>
                             </div>
                         )}
-                        {/* <div className="d-flex align-items-center border rounded rounded-pill bg-white fs-12px px-2 me-2">
-                            <span>میز گیمینگ</span>
-                            <button
-                                className="btn p-0 bg-white"
-                                onClick={() => {}}
-                            >
-                                <i className="btn p-0 bi bi-x fs-20px"></i>
-                            </button>
-                        </div> */}
                     </div>
                     <div className="row m-0 pt-2">
                         {filteredProducts.map(item => {
@@ -113,7 +92,9 @@ const Products = () => {
                                 <div
                                     className="col-12 col-sm-6 col-md-4 col-lg-4 px-2 pb-4 px-lg-1 pb-lg-2"
                                     key={item}
-                                    onClick={() => navigator(AppRoutes.product)}
+                                    onClick={() =>
+                                        navigator(`/product/${item.id}`)
+                                    }
                                 >
                                     <Product
                                         name={item.name}
@@ -149,11 +130,3 @@ const testProduct = {
     ],
     image: gamingDesk,
 }
-
-const rootHistory = [
-    { title: "همه دسته‌ها", link: AppRoutes.home },
-    { title: "لوازم خانگی", link: AppRoutes.home },
-    { title: "مبلمان و صنایع چوب", link: AppRoutes.home },
-    { title: "میز", link: AppRoutes.home },
-    { title: "میز گیمینگ", link: AppRoutes.home },
-]

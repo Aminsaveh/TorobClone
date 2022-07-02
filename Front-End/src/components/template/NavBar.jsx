@@ -46,6 +46,7 @@ const NavBar = () => {
             category,
         })
         setProducts(response.products)
+        navigator(AppRoutes.products)
         setMenuParentItemId(null)
     }
 
@@ -58,6 +59,7 @@ const NavBar = () => {
                     product.category === category && product.brand === brand
             )
         )
+        navigator(AppRoutes.products)
         setMenuParentItemId(null)
     }
 
